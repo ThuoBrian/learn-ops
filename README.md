@@ -5,6 +5,7 @@ courses, free certs, and scholarships; evaluate each against your career goals; 
 enrollment pipeline — all from your AI coding CLI (Claude Code, Codex, OpenCode, Gemini,
 Qwen, Copilot, Kimi, Antigravity CLI).
 
+Maintained by **Brian Thuo** (bthuo@poverty-action.org).
 Forked from [career-ops](https://github.com/santifer/career-ops) (the AI job-search
 pipeline). Same framework — provider-plugin scanner, A-G evaluation, canonical-state
 tracker, safe auto-updater, multi-CLI agent skill — repurposed for **learning**, not jobs.
@@ -21,7 +22,7 @@ tracker, safe auto-updater, multi-CLI agent skill — repurposed for **learning*
 ## Quick start
 
 ```bash
-npx @santifer/learn-ops init     # or: git clone this repo
+git clone https://github.com/bthuo/learn-ops   # or download the zip
 cd learn-ops && npm install
 node doctor.mjs                   # health check
 ```
