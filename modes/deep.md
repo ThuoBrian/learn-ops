@@ -6,7 +6,7 @@ breadth, free-tier honesty, cert recognition, lab quality, update cadence).
 
 ## Usage
 
-```
+```text
 /learn-ops deep <provider-name-or-URL>
 ```
 

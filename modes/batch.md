@@ -63,6 +63,7 @@ batch/batch-runner.sh [OPTIONS]
 ```
 
 Options:
+
 - `--dry-run` — list pending URLs without evaluating
 - `--retry-failed` — retry only URLs marked `failed`
 - `--resume-paused` — resume URLs paused after a session/rate limit
@@ -74,12 +75,13 @@ Options:
 
 ## batch-state.tsv Format
 
-```text
-id	url	status	started_at	completed_at	report_num	score	error	retries
-1	https://...	completed	2026-...	2026-...	002	4.2	-	0
-2	https://...	failed	2026-...	2026-...	-	-	Unreachable	1
-3	https://...	pending	-	-	-	-	-	0
 ```
+id  url           status       started_at  completed_at  report_num  score  error        retries
+1   https://...   completed    2026-...    2026-...      002         4.2    -            0
+2   https://...   failed       2026-...    2026-...      -           -      Unreachable  1
+3   https://...   pending      -           -             -           -      -            0
+```
+(columns are tab-separated in the actual file)
 
 Valid statuses: `pending`, `processing`, `completed`, `failed`, `skipped`, `rate_limited`,
 `paused_rate_limit`.
@@ -96,6 +98,7 @@ Each worker receives `batch/batch-prompt.md` as a system prompt. It is self-cont
 See the **Headless / Batch Mode** table in `AGENTS.md` for the correct CLI headless command.
 
 Each worker produces:
+
 1. `.md` report in `reports/`
 2. Tracker TSV line in `batch/tracker-additions/{id}.tsv`
 3. Result JSON via stdout
@@ -103,7 +106,7 @@ Each worker produces:
 ## Error Handling
 
 | Error | Recovery |
-|-------|----------|
+| ----- | -------- |
 | URL unreachable | Mark `failed`, log reason, continue to next URL |
 | Free track paywalled | Evaluate as `DON'T DO` (Block G), mark completed |
 | Worker crashes | Mark `failed`, continue. Retry with `--retry-failed` |
