@@ -49,6 +49,8 @@ const ALIASES = {
   'no-enroll': 'skip', 'monitor': 'skip', 'decline': 'skip',
 };
 
+// Internal column key names (shared between career-ops and learn-ops column names).
+
 let errors = 0;
 let warnings = 0;
 
@@ -72,15 +74,23 @@ const lines = content.split('\n');
 // legacy fixed layout when no recognizable header row is found.
 const LEGACY_COLMAP = { num: 1, date: 2, company: 3, role: 4, score: 5, status: 6, pdf: 7, report: 8, notes: 9 };
 const HEADER_ALIASES = {
-  '#': 'num', 'num': 'num', 'date': 'date', 'company': 'company', 'empresa': 'company',
-  'role': 'role', 'puesto': 'role', 'location': 'location', 'score': 'score',
+  '#': 'num', 'num': 'num', 'date': 'date',
+  // career-ops names
+  'company': 'company', 'empresa': 'company',
+  'role': 'role', 'puesto': 'role',
+  // learn-ops names
+  'provider': 'company', 'course': 'role',
+  'plan': 'pdf',
+  'location': 'location', 'score': 'score',
   'status': 'status', 'pdf': 'pdf', 'report': 'report', 'notes': 'notes',
 };
 function detectColumns(allLines) {
   for (const line of allLines) {
     if (!line.startsWith('|')) continue;
     const cells = line.split('|').map(s => s.trim().toLowerCase());
-    if (!cells.includes('company') || !cells.includes('role')) continue;
+    const hasCompany = cells.some(c => HEADER_ALIASES[c] === 'company');
+    const hasRole = cells.some(c => HEADER_ALIASES[c] === 'role');
+    if (!hasCompany || !hasRole) continue;
     const map = {};
     cells.forEach((c, i) => { if (HEADER_ALIASES[c] != null) map[HEADER_ALIASES[c]] = i; });
     if (['num', 'company', 'role', 'score', 'status'].every(k => map[k] != null)) return map;
