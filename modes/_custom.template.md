@@ -26,19 +26,20 @@
 
 <!-- Rules the agent should always follow. Examples:
      - Always write evaluation summaries in British English.
-     - Never include a photo in my CV (US / ATS-first market).
-     - Cap each batch run at 20 listings unless I say otherwise.
-     - If a report scores below 6, skip the cover letter. -->
+     - Only evaluate courses that include hands-on labs or a capstone project.
+     - Skip courses longer than 10 hours unless it's a core archetype skill gap.
+     - Prefer courses with certificates recognized by employers (check Block D).
+     - Cap each batch run at 20 URLs unless I say otherwise. -->
 
 (none yet -- add yours above)
 
 ## Custom Workflows
 
 <!-- Multi-step routines you run often, given a short name. Examples:
-     - "weekly review": scan my saved portals, evaluate the new roles,
+     - "weekly review": scan my saved portals, evaluate new courses,
        then give me a one-paragraph summary of the top 3.
-     - "prep <company>": pull the JD, generate STAR stories from
-       article-digest.md, and draft 5 likely interview questions. -->
+     - "deep <provider>": research the provider, list all free tracks,
+       and compare them to my archetype's target skills. -->
 
 (none yet -- add yours above)
 
@@ -54,7 +55,7 @@
 ## Off-Limits
 
 <!-- Things the agent must never do for you. Examples:
-     - Never auto-fill or submit an application without showing me first.
-     - Never edit a system file to customize my setup -- put it here. -->
+     - Never enroll me in a course or change my tracker status without my confirmation.
+     - Never edit a system file to customize my setup — put it here. -->
 
 (none yet -- add yours above)

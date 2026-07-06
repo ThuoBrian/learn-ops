@@ -28,6 +28,10 @@ export const SKILL_ENTRYPOINTS = [
     path: '.grok/skills/learn-ops/SKILL.md',
     pointer: '../../../.agents/skills/learn-ops/SKILL.md',
   },
+  {
+    path: '.kimi/skills/learn-ops/SKILL.md',
+    pointer: '../../../.agents/skills/learn-ops/SKILL.md',
+  },
 ];
 
 function repoPath(root, path) {

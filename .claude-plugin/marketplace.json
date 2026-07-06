@@ -1,7 +1,7 @@
 {
   "name": "learn-ops",
   "metadata": {
-    "description": "AI job search command center — evaluate offers, generate CVs, scan portals, track applications"
+    "description": "Free AI/ML & cybersecurity training finder — discover, evaluate, and track free courses for IT professionals"
   },
   "owner": {
     "name": "santifer",
@@ -11,7 +11,7 @@
     {
       "name": "learn-ops",
       "source": "./",
-      "description": "AI job search pipeline — evaluate offers, generate CVs, scan portals, track applications",
+      "description": "Free AI/ML & cybersecurity training finder — discover, evaluate, and track free courses for IT professionals",
       "category": "productivity"
     }
   ]

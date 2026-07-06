@@ -37,19 +37,16 @@ mkdirSync(join(LEARN_OPS, 'data'), { recursive: true });
 mkdirSync(REPORTS_DIR, { recursive: true });
 
 const CANONICAL_STATUSES = [
-  'evaluated', 'applied', 'responded', 'interview',
-  'offer', 'rejected', 'discarded', 'skip',
+  'evaluated', 'enrolled', 'in_progress', 'completed', 'dropped', 'skip',
 ];
 
 const ALIASES = {
-  'evaluada': 'evaluated', 'condicional': 'evaluated', 'hold': 'evaluated', 'evaluar': 'evaluated', 'verificar': 'evaluated',
-  'aplicado': 'applied', 'enviada': 'applied', 'aplicada': 'applied', 'applied': 'applied', 'sent': 'applied',
-  'respondido': 'responded',
-  'entrevista': 'interview',
-  'oferta': 'offer',
-  'rechazado': 'rejected', 'rechazada': 'rejected',
-  'descartado': 'discarded', 'descartada': 'discarded', 'cerrada': 'discarded', 'cancelada': 'discarded',
-  'no aplicar': 'skip', 'no_aplicar': 'skip', 'monitor': 'skip', 'geo blocker': 'skip',
+  'reviewed': 'evaluated', 'scored': 'evaluated',
+  'registered': 'enrolled', 'joined': 'enrolled', 'started-enrollment': 'enrolled',
+  'active': 'in_progress', 'studying': 'in_progress', 'learning': 'in_progress',
+  'finished': 'completed', 'done': 'completed', 'passed': 'completed',
+  'abandoned': 'dropped', 'paused': 'dropped', 'stopped': 'dropped',
+  'no-enroll': 'skip', 'monitor': 'skip', 'decline': 'skip',
 };
 
 let errors = 0;

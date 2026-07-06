@@ -104,7 +104,7 @@ If the user says "rollback" or runs `/learn-ops update rollback`:
 
 ## Rules
 
-- NEVER auto-modify User Layer files during update (cv.md, config/profile.yml, data/, reports/, output/, interview-prep/, jds/, article-digest.md, portals.yml)
+- NEVER auto-modify User Layer files during update (learner-profile.md, config/learner-profile.yml, modes/_profile.md, modes/_custom.md, learning-portals.yml, data/, reports/, output/)
 - `modes/_profile.md` is User Layer too: the compatibility check in Step 3 reads it strictly read-only
 - Exception: `modes/_profile.md` may be edited **only** in Step 4.3, and **only** after the user explicitly confirms each individual rename/removal. Never batch-edit without per-change consent.
 - User-specific customizations (archetypes, scoring weights, narrative) belong in `modes/_profile.md` or `config/profile.yml`, never in `modes/_shared.md`

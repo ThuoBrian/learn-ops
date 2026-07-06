@@ -1,67 +1,60 @@
-# Mode: batch — Mass Processing of Jobs
+# Mode: batch — Batch Processing of Pending Course URLs
 
-Two usage modes: **conductor --chrome** (navigates portals in real time) or **standalone** (script for URLs already collected).
+Evaluate multiple course URLs from `data/learning-inbox.md` in sequence, producing a
+report and tracker entry for each. Use this when the inbox has accumulated several URLs
+and the learner wants to process them all in one session.
 
 ## Architecture
 
 ```text
-Conductor (headed browser mode)
+Batch orchestrator (this mode)
   │
-  │  Chrome: navigates portals (logged-in sessions)
-  │  Reads DOM directly — the user sees everything in real time
+  │  Reads data/learning-inbox.md → pending URL list
   │
-  ├─ Job 1: reads JD from DOM + URL
-  │    └─► headless worker → report .md + PDF + tracker-line
-  │
-  ├─ Job 2: click next, read JD + URL
-  │    └─► headless worker → report .md + PDF + tracker-line
-  │
-  └─ End: merge tracker-additions → applications.md + summary
+  ├─ URL 1: delegate to `course` mode → report .md + tracker TSV
+  ├─ URL 2: same
+  └─ End: merge tracker-additions → data/enrollments.md + summary
 ```
 
-Each worker is a headless child process with a clean 200K token context. The conductor only orchestrates. See the **Headless / Batch Mode** table in `AGENTS.md` for the correct command per CLI.
+Each URL is evaluated independently. The orchestrator tracks progress so a partial run
+can be resumed without re-evaluating completed items.
 
 ## Files
 
 ```text
+data/
+  learning-inbox.md         # Pending URLs (source)
 batch/
-  batch-input.tsv               # URLs (from conductor or manual)
-  batch-state.tsv               # Progress (auto-generated, gitignored)
-  batch-runner.sh               # Standalone orchestrator script
-  batch-prompt.md               # Prompt template for workers
-  logs/                         # One log per job (gitignored)
-  tracker-additions/            # Tracker lines (gitignored)
+  batch-input.tsv           # URLs extracted from inbox (auto-generated)
+  batch-state.tsv           # Progress per URL (auto-generated, gitignored)
+  batch-runner.sh           # Standalone shell orchestrator
+  batch-prompt.md           # Prompt template for headless workers
+  logs/                     # One log per URL (gitignored)
+  tracker-additions/        # Tracker TSV lines (gitignored until merged)
 ```
 
-## Mode A: Conductor --chrome
+## Mode A: Interactive (agent-driven)
 
-1. **Read state**: `batch/batch-state.tsv` → identify what has already been processed
-2. **Navigate portal**: Chrome → search URL
-3. **Extract URLs**: Read results DOM → extract URL list → append to `batch-input.tsv`
+1. **Read inbox**: Parse `data/learning-inbox.md` → collect all lines in the `## Pending`
+   section that contain URLs.
+2. **Show queue**: List the pending URLs with a count.
+3. **Read state**: Check `batch/batch-state.tsv` → skip any URLs already marked `completed`.
 4. **For each pending URL**:
-   a. Chrome: click on the job → read JD text from the DOM
-   b. Save JD to `/tmp/batch-jd-{id}.txt`
-   c. Calculate next sequential REPORT_NUM
-   d. Execute via Bash:
-
-      ```bash
-      # Use your CLI's headless command (see AGENTS.md — Headless / Batch Mode)
-      <headless-cmd> "Process this job. URL: {url}. JD: /tmp/batch-jd-{id}.txt. Report: {num}. ID: {id}"
-      ```
-
-   e. Update `batch-state.tsv` (completed/failed + score + report_num)
-   f. Log to `logs/{report_num}-{id}.log`
-   g. Chrome: go back → next job
-5. **Pagination**: If no more jobs → click "Next" → repeat
-6. **End**: Merge `tracker-additions/` → `applications.md` + summary
+   a. Run `node check-liveness.mjs <url>` — skip if unreachable (mark `failed` in state).
+   b. Reserve a report number: `node reserve-report-num.mjs` → NNN.
+   c. Delegate to `course` mode: evaluate the URL using the full A-G rubric.
+   d. Write report to `reports/{NNN}-{provider-slug}-{YYYY-MM-DD}.md`.
+   e. Release sentinel: `node reserve-report-num.mjs --release {NNN}`.
+   f. Write tracker line to `batch/tracker-additions/{NNN}-{slug}.tsv`.
+   g. Mark URL `completed` in `batch/batch-state.tsv`.
+   h. Move the URL line from `## Pending` to `## Processed` in `data/learning-inbox.md`.
+5. **After all URLs**: run `node merge-tracker.mjs` to flush into `data/enrollments.md`.
+6. **Summary**: show counts (processed / failed / skipped) and top-scoring courses.
 
 ### What to watch during a run
 
-During a conductor run, the operator has two primary live interfaces to monitor:
-1. **The headed Chrome window:** Watch the browser navigate the portals, login to sessions, and interact with the job description pages in real time.
-2. **The agent CLI conversation:** Follow the agent's turn-by-turn narration in the shell.
-
-The individual worker tasks spawn headlessly in the background and write their stdout/stderr logs to `batch/logs/{report_num}-{id}.log`, which can be inspected on demand.
+1. The agent conversation — turn-by-turn narration of which URL is being evaluated.
+2. `batch/batch-state.tsv` — progress per URL (safe to inspect mid-run).
 
 ## Mode B: Standalone script
 
@@ -70,54 +63,53 @@ batch/batch-runner.sh [OPTIONS]
 ```
 
 Options:
-- `--dry-run` — list pending jobs without executing
-- `--retry-failed` — retry only failed jobs
-- `--resume-paused` — resume jobs paused after a Claude session/rate limit
-- `--start-from N` — start from ID N
-- `--limit N` — max number of jobs to process in this run
-- `--parallel N` — N workers in parallel
-- `--max-retries N` — attempts per job (default: 2)
-- `--rate-limit-sleep N` — seconds to wait before retrying a transient rate-limited worker (default: 300; use 0 to pause the batch immediately)
+- `--dry-run` — list pending URLs without evaluating
+- `--retry-failed` — retry only URLs marked `failed`
+- `--resume-paused` — resume URLs paused after a session/rate limit
+- `--start-from N` — start from inbox item N
+- `--limit N` — max number of URLs to process in this run
+- `--parallel N` — N workers in parallel (default: 1 — sequential is safer)
+- `--max-retries N` — attempts per URL (default: 2)
+- `--rate-limit-sleep N` — seconds to wait before retrying after a rate limit (default: 300)
 
 ## batch-state.tsv Format
 
 ```text
 id	url	status	started_at	completed_at	report_num	score	error	retries
 1	https://...	completed	2026-...	2026-...	002	4.2	-	0
-2	https://...	failed	2026-...	2026-...	-	-	Error msg	1
+2	https://...	failed	2026-...	2026-...	-	-	Unreachable	1
 3	https://...	pending	-	-	-	-	-	0
-4	https://...	rate_limited	2026-...	2026-...	004	-	rate-limit; retrying after 300s	1
-5	https://...	paused_rate_limit	2026-...	2026-...	005	-	session limit; paused	1
 ```
 
-Valid statuses include `pending`, `processing`, `completed`, `failed`, `skipped`, `rate_limited`, and `paused_rate_limit`. `rate_limited` is an intermediate non-completed state emitted while the runner waits before retrying; if the run is interrupted there, a later non-`--retry-failed` run treats it as pending work.
-
-`paused_rate_limit` means a worker hit a Claude session/usage limit. The runner stops scheduling new offers, preserves the retry count, and resumes only when explicitly called with `--resume-paused`.
+Valid statuses: `pending`, `processing`, `completed`, `failed`, `skipped`, `rate_limited`,
+`paused_rate_limit`.
 
 ## Resumability
 
-- If it crashes → re-run → reads `batch-state.tsv` → skip completed jobs
-- Lock file (`batch-runner.pid`) prevents double execution
-- Each worker is independent: failure in job #47 does not affect the others
+- If a run crashes → re-run → reads `batch-state.tsv` → skips completed URLs.
+- Lock file (`batch-runner.pid`) prevents concurrent execution.
+- Each URL is independent: a failure on URL #5 does not affect #6 onwards.
 
-## Workers (headless mode)
+## Workers (headless / standalone mode)
 
-Each worker receives `batch-prompt.md` as a system prompt. It is self-contained. Use your CLI's headless command — see the **Headless / Batch Mode** table in `AGENTS.md`.
+Each worker receives `batch/batch-prompt.md` as a system prompt. It is self-contained.
+See the **Headless / Batch Mode** table in `AGENTS.md` for the correct CLI headless command.
 
-The worker produces:
+Each worker produces:
 1. `.md` report in `reports/`
-2. PDF in `output/`
-3. Tracker line in `batch/tracker-additions/{id}.tsv`
-4. Result JSON via stdout
+2. Tracker TSV line in `batch/tracker-additions/{id}.tsv`
+3. Result JSON via stdout
 
-## Error handling
+## Error Handling
 
 | Error | Recovery |
 |-------|----------|
-| URL inaccessible | Worker fails → conductor marks `failed`, continues |
-| JD behind login | Conductor attempts to read DOM. If it fails → `failed` |
-| Portal changes layout | Conductor reasons about HTML, adapts |
-| Worker crashes | Conductor marks `failed`, continues. Retry with `--retry-failed` |
-| Claude session/usage limit | Runner marks the current offer `paused_rate_limit`, stops scheduling new offers, preserves retries. Resume with `--resume-paused` after reset. |
-| Conductor crashes | Re-run → reads state → skip completed jobs |
-| PDF fails | .md report is saved. PDF remains pending |
+| URL unreachable | Mark `failed`, log reason, continue to next URL |
+| Free track paywalled | Evaluate as `DON'T DO` (Block G), mark completed |
+| Worker crashes | Mark `failed`, continue. Retry with `--retry-failed` |
+| Session/rate limit | Mark `paused_rate_limit`, stop. Resume with `--resume-paused` |
+| Orchestrator crashes | Re-run → reads state → skip completed |
+
+## After the Batch
+
+Run `node verify-pipeline.mjs` to confirm the tracker is clean after the merge.
