@@ -1,0 +1,88 @@
+# Learning Scanner Configuration — learn-ops
+# Used by `node scan.mjs` (and /learn-ops learn-scan) to discover FREE AI/ML and
+# cybersecurity trainings. Schema reuses the tracked_companies/title_filter pattern (topic filter via title_filter)
+# so scan.mjs works unchanged: title_filter acts as the topic filter; providers
+# only return free / free-via-aid / scholarship items, so no salary/location filter
+# is needed. `location` on each record carries the cost_tier (free|free-via-aid|scholarship).
+
+# ── Topic filter (reuses scan.mjs title_filter) ─────────────────────────
+# Keep courses whose title contains any positive keyword and no negative keyword.
+title_filter:
+  positive:
+    - "Machine Learning"
+    - "Deep Learning"
+    - "AI"
+    - "LLM"
+    - "RAG"
+    - "MLOps"
+    - "TensorFlow"
+    - "PyTorch"
+    - "Pandas"
+    - "Python"
+    - "SQL"
+    - "Data Visualization"
+    - "Feature Engineering"
+    - "Computer Vision"
+    - "NLP"
+    - "Natural Language Processing"
+    - "Reinforcement Learning"
+    - "Time Series"
+    - "Cybersecurity"
+    - "Security"
+    - "SQL injection"
+    - "XSS"
+    - "CSRF"
+    - "SSRF"
+    - "Penetration"
+    - "Web Security"
+    - "Authentication"
+    - "Access Control"
+    - "Ethics"
+  negative:
+    - "Paid"
+    - "Premium"
+    - "Masterclass"
+    - "Guaranteed Job"
+
+# ── Tracked learning sources (reuses scan.mjs tracked_companies) ────────
+# `provider:` forces a specific provider (bypasses detect()). `cost_tier` is an
+# arbitrary field scan.mjs ignores; providers set it on each record.
+tracked_companies:
+  # --- AI/ML ---
+  - name: Kaggle Learn
+    careers_url: https://www.kaggle.com/learn
+    provider: kaggle
+    cost_tier: free
+    enabled: true
+
+  - name: Coursera (free audit — AI/ML + Cyber)
+    careers_url: https://www.coursera.org/browse/data-science/machine-learning
+    provider: coursera
+    cost_tier: free-via-aid
+    enabled: true
+
+  # --- Cybersecurity ---
+  - name: PortSwigger Web Security Academy
+    careers_url: https://portswigger.net/web-security/all-labs
+    provider: portswigger
+    cost_tier: free
+    enabled: true
+
+# ── WebSearch handoff queries (Level 3) ─────────────────────────────────
+# Sources scan.mjs can't hit via a provider are discovered via WebSearch.
+search_queries:
+  - name: Free AI/ML courses — Fast.ai / DeepLearning.AI
+    query: 'site:fast.ai OR site:deeplearning.ai "free" course machine learning OR deep learning'
+    enabled: true
+
+  - name: Free cybersecurity training — TryHackMe / ISC2 CC
+    query: '"free" cybersecurity course OR certification "ISC2" OR "TryHackMe" OR "Professor Messer"'
+    enabled: true
+
+  - name: Free AI/ML university courses — MIT OCW / Stanford
+    query: 'site:ocw.mit.edu OR site:cs.stanford.edu "machine learning" OR "deep learning" free'
+    enabled: true
+
+  - name: Free AI/ML + cybersecurity scholarships
+    query: '"scholarship" "AI" OR "machine learning" OR "cybersecurity" free training 2026'
+    enabled: true

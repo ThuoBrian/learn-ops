@@ -1,0 +1,46 @@
+# learn-ops Canonical Enrollment States
+# Source of truth for the learning tracker (data/enrollments.md).
+# merge-tracker.mjs + normalize-statuses.mjs + verify-learning.mjs enforce these.
+
+states:
+  - id: evaluated
+    label: Evaluated
+    aliases: [reviewed, scored]
+    description: Course/cert evaluated with a report, pending enrollment decision.
+    dashboard_group: pending
+
+  - id: enrolled
+    label: Enrolled
+    aliases: [registered, joined, started-enrollment]
+    description: Enrollment submitted/confirmed.
+    dashboard_group: active
+
+  - id: in_progress
+    label: In Progress
+    aliases: [active, studying, learning]
+    description: Actively studying the course.
+    dashboard_group: active
+
+  - id: completed
+    label: Completed
+    aliases: [finished, done, passed]
+    description: Course/cert completed.
+    dashboard_group: done
+
+  - id: dropped
+    label: Dropped
+    aliases: [abandoned, paused, stopped]
+    description: Started then abandoned or paused.
+    dashboard_group: closed
+
+  - id: skip
+    label: SKIP
+    aliases: [no-enroll, monitor, decline]
+    description: Doesn't fit the learner's goals — don't enroll.
+    dashboard_group: closed
+
+# Rules (enforced):
+# - Status field contains EXACTLY one id/alias (case-insensitive).
+# - No markdown bold (**) in the status field.
+# - No dates in the status field (use the Date column).
+# - No extra text in the status field (use the Notes column).

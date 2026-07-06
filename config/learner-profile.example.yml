@@ -1,0 +1,36 @@
+# learn-ops — Learner Profile Configuration
+# Copy this file to config/learner-profile.yml and fill in your details.
+# This is the single source of truth for your learning goals across all modes.
+
+learner:
+  full_name: ""              # your name (blank in template)
+  email: ""
+  location: ""               # city, country
+  timezone: ""               # e.g. EAT (UTC+3)
+  target_track: ai_ml        # ai_ml | cybersecurity
+  archetype_id: ai_ml_applied  # one id from config/archetypes.yml
+  level: intermediate        # beginner | intermediate | advanced
+  time_budget_hrs_week: 8
+  budget: free_only          # free_only | free_with_aid | scholarship_ok
+
+learning_goals:
+  north_star:
+    - "Transition from IT operations into applied AI/ML engineering"
+  skill_gaps:
+    - "LLM evaluation & observability"
+    - "RAG systems"
+    - "MLOps deployment"
+  cert_targets:
+    - "ISC2 CC (free)"
+    - "Google Cybersecurity Certificate (free via aid)"
+    - "Microsoft SC-900 (free)"
+
+constraints:
+  budget_note: "Free courses, free certs, and scholarships only. No paid-only courses."
+  availability: "Evenings + weekends"
+
+# Notes:
+# - target_track + archetype_id select the scoring archetype from config/archetypes.yml.
+# - skill_gaps are the positive keywords the scanner's topic_filter matches against.
+# - cert_targets feed the "Cert Recruiter-Signal" scoring dimension.
+# - time_budget_hrs_week feeds the "Time/Effort Fit" dimension.

@@ -1,0 +1,120 @@
+# learn-ops Archetypes — IT professionals transitioning into AI/ML or Cybersecurity
+# Generic, distributable. Each archetype carries target skills, recommended free
+# certs, portfolio deliverables, and recruiter-signal notes. The evaluation scores
+# free trainings against the learner's chosen archetype + learning_goals.
+
+archetypes:
+  - id: ai_ml_applied
+    name: "IT → AI/ML Applied Engineer"
+    track: ai_ml
+    level: mid-senior
+    summary: "Ship ML/LLM features into production — retrieval, evals, inference, observability."
+    target_skills:
+      - "Python (pandas, numpy, scikit-learn)"
+      - "PyTorch / TensorFlow"
+      - "LLM integration (RAG, embeddings, prompt engineering)"
+      - "MLOps: deployment, monitoring, evals"
+      - "Feature engineering & data pipelines"
+    recommended_free_certs:
+      - "Google Machine Learning Crash Course (free)"
+      - "Fast.ai Practical Deep Learning (free)"
+      - "DeepLearning.AI short courses (free)"
+      - "Google TensorFlow Developer (free via aid)"
+    portfolio_deliverables:
+      - "An end-to-end RAG application with evals + observability"
+      - "A fine-tuned or prompt-engineered LLM feature with metrics"
+    recruiter_signal_notes: "HMs look for shipped ML features with measurable outcomes, not just coursework."
+
+  - id: ml_mlops
+    name: "IT → ML/MLOps Engineer"
+    track: ai_ml
+    level: mid-senior
+    summary: "Put ML in production reliably — pipelines, serving, monitoring, cost/reliability trade-offs."
+    target_skills:
+      - "MLOps pipelines (Kubeflow, MLflow, Airflow)"
+      - "Model serving (FastAPI, Triton, SageMaker)"
+      - "Observability & evals for production ML"
+      - "Docker / Kubernetes / CI for ML"
+      - "Cost & latency optimization"
+    recommended_free_certs:
+      - "Google MLOps (free via aid)"
+      - "Databricks Academy (free tier)"
+      - "Microsoft Learn — Azure ML (free)"
+    portfolio_deliverables:
+      - "A reproducible training + serving pipeline with monitoring dashboards"
+    recruiter_signal_notes: "DevOps-adjacent IT background is a real edge here — emphasize reliability instincts."
+
+  - id: ai_ml_research
+    name: "IT → AI/ML Research"
+    track: ai_ml
+    level: senior
+    summary: "Read, reproduce, and extend ML research — math foundations + papers."
+    target_skills:
+      - "Linear algebra, probability, calculus"
+      - "Paper reproduction (PyTorch)"
+      - "Experiment design & ablations"
+      - "Mathematical maturity"
+    recommended_free_certs:
+      - "MIT OCW 6.S191 / 18.06 (free)"
+      - "Stanford CS229n / CS231n (free)"
+      - "fast.ai + papers-with-code"
+    portfolio_deliverables:
+      - "A reproduced paper with an extension + writeup"
+    recruiter_signal_notes: "Research track values rigor + publication-style writeups over certs."
+
+  - id: cybersecurity_analyst
+    name: "IT → Cybersecurity Analyst (SOC)"
+    track: cybersecurity
+    level: mid
+    summary: "Detect, triage, and respond to threats — SIEM, alerting, incident response."
+    target_skills:
+      - "SIEM (Splunk, ELK, Microsoft Sentinel)"
+      - "Threat detection & alerting"
+      - "Incident response & forensics"
+      - "Network traffic analysis"
+      - "Log analysis"
+    recommended_free_certs:
+      - "ISC2 Certified in Cybersecurity (CC) — free"
+      - "Google Cybersecurity Certificate (free via aid)"
+      - "Microsoft SC-900 (free)"
+      - "Professor Messer Security+ (free prep)"
+    portfolio_deliverables:
+      - "A SOC playbook + a detected-and-contained incident writeup (TryHackMe/BlueTeam Labs)"
+    recruiter_signal_notes: "Security+ and ISC2 CC are the entry signals; hands-on lab writeups differentiate."
+
+  - id: cloud_security
+    name: "IT → Cloud Security Engineer"
+    track: cybersecurity
+    level: mid-senior
+    summary: "Secure cloud + identity — IAM, zero trust, compliance, CSPM."
+    target_skills:
+      - "Cloud IAM (Azure AD, AWS IAM, GCP)"
+      - "Zero trust & network security"
+      - "CSPM / security posture"
+      - "Compliance (SOC2, ISO 27001, GDPR)"
+      - "IaC security (Terraform, Bicep)"
+    recommended_free_certs:
+      - "Microsoft SC-900 (free)"
+      - "AWS Cloud Practitioner (free via aid)"
+      - "Google Cloud Security (free via aid)"
+    portfolio_deliverables:
+      - "A hardened cloud landing zone with IAM + monitoring + compliance evidence"
+    recruiter_signal_notes: "Cloud + existing IT-ops/identity background is a strong, credible combo."
+
+  - id: pentest
+    name: "IT → Penetration Tester / Red Team"
+    track: cybersecurity
+    level: mid-senior
+    summary: "Find and exploit weaknesses ethically — web, network, host."
+    target_skills:
+      - "Web exploitation (OWASP Top 10)"
+      - "Network pentesting (Nmap, Metasploit)"
+      - "Privilege escalation & lateral movement"
+      - "Reporting & remediation"
+    recommended_free_certs:
+      - "PortSwigger Web Security Academy (free)"
+      - "TryHackMe / HackTheBox free paths"
+      - "Professor Messer Pentest+ prep (free)"
+    portfolio_deliverables:
+      - "A responsible-disclosure writeup or a HackTheBox/TryHackMe complete-path with notes"
+    recruiter_signal_notes: "Hands-on lab hours + writeups matter more than certs here; PJPT/OSCP later (paid)."
