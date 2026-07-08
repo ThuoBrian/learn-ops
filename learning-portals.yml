@@ -38,6 +38,25 @@ title_filter:
     - "Authentication"
     - "Access Control"
     - "Ethics"
+    # Generative AI / LLM tooling
+    - "Generative"
+    - "SageMaker"
+    - "Bedrock"
+    - "Agents"
+    - "Embeddings"
+    - "Fine-tuning"
+    - "Inference"
+    # SRE / cloud engineering track
+    - "Site Reliability"
+    - "SRE"
+    - "Kubernetes"
+    - "Terraform"
+    - "Infrastructure as Code"
+    - "Cloud Architecture"
+    - "Cloud Engineering"
+    - "DevOps"
+    - "Observability"
+    - "Monitoring"
   negative:
     - "Paid"
     - "Premium"
@@ -61,10 +80,34 @@ tracked_companies:
     cost_tier: free-via-aid
     enabled: true
 
+  - name: DeepLearning.AI Short Courses
+    careers_url: https://www.deeplearning.ai/courses/
+    provider: deeplearning
+    cost_tier: free
+    enabled: true
+
+  - name: AWS Skill Builder (Free AI/ML)
+    careers_url: https://skillbuilder.aws/
+    provider: aws-skillbuilder
+    cost_tier: free
+    enabled: true
+
+  - name: MIT OCW (AI/ML)
+    careers_url: https://ocw.mit.edu/search/?q=machine+learning&type=course
+    provider: mit-ocw
+    cost_tier: free
+    enabled: true
+
   # --- Cybersecurity ---
   - name: PortSwigger Web Security Academy
     careers_url: https://portswigger.net/web-security/all-labs
     provider: portswigger
+    cost_tier: free
+    enabled: true
+
+  - name: TryHackMe (Free Paths)
+    careers_url: https://tryhackme.com/paths
+    provider: tryhackme
     cost_tier: free
     enabled: true
 
@@ -85,4 +128,12 @@ search_queries:
 
   - name: Free AI/ML + cybersecurity scholarships
     query: '"scholarship" "AI" OR "machine learning" OR "cybersecurity" free training 2026'
+    enabled: true
+
+  - name: Free cloud and SRE training — Linux Foundation / CNCF
+    query: '"free" site:training.linuxfoundation.org OR site:academy.cncf.io "Kubernetes" OR "SRE" OR "cloud native"'
+    enabled: true
+
+  - name: Free cloud engineering courses — Google Cloud / Microsoft Learn / AWS
+    query: '"free" "cloud engineering" OR "site reliability" OR "SRE" course 2026 "Google Cloud" OR "Azure" OR "AWS"'
     enabled: true

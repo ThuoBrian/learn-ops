@@ -32,7 +32,7 @@ export default {
   id: ID,
   detect(entry) {
     const url = entry?.careers_url || entry?.url || '';
-    return /coursera\.org|deeplearning\.ai/.test(url) ? { url } : null;
+    return /coursera\.org/.test(url) ? { url } : null;
   },
   async fetch(entry, ctx) {
     // MVP: curated list. (Live catalog fetch deferred to Phase 8 — needs API key.)
