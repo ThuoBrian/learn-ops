@@ -63,14 +63,14 @@ a rate-limit error; learn-ops will pause and suggest retrying tomorrow.
 
 - With free-tier limits, keep `--parallel 1` to avoid burning through
   your daily quota on parallel requests.
-- Large batches (50+ offers) will likely span multiple days. Use
+- Large batches (50+ courses) will likely span multiple days. Use
   `--start-from` to resume where you left off.
 
 ## What Works Without Paying
 
 | Feature                 | Free tier | Notes                            |
 |-------------------------|-----------|----------------------------------|
-| Offer evaluation (A-F)  | ✅        | Full scoring pipeline            |
+| Course evaluation (A–G) | ✅        | Full scoring pipeline            |
 | Report generation (.md) | ✅        | Markdown reports                 |
 | Portal scanning         | ✅        | Zero-token — hits APIs directly  |
 | PDF generation          | ✅        | Uses local Playwright, no tokens |

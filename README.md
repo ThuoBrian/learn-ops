@@ -22,13 +22,17 @@ tracker, safe auto-updater, multi-CLI agent skill — repurposed for **learning*
 ## Quick start
 
 ```bash
-git clone https://github.com/bthuo/learn-ops   # or download the zip
+git clone https://github.com/ThuoBrian/learn-ops
 cd learn-ops && npm install
 node doctor.mjs                   # health check
 ```
 
 Then in your AI CLI, run `/learn-ops` to see the command menu. On first run it guides you
 through onboarding (learner profile + goals + sources to scan).
+
+**Windows users (no terminal experience needed):** Download the zip, extract it, and
+double-click `setup.bat`. After setup, double-click `run.bat` to launch the guided menu.
+See [INSTALL.md](INSTALL.md) for full instructions.
 
 ## Commands
 

@@ -53,12 +53,12 @@ node generate-latex.mjs output/cv-name-company-date.tex output/custom-name.pdf
 
 ### portals.example.yml
 
-Pre-configured portal scanner with 45+ tracked companies and search queries. Contains title filters, company career page URLs, Greenhouse API endpoints, and WebSearch queries.
+Pre-configured portal scanner with 45+ training providers and search queries. Contains title filters, provider URLs, and WebSearch queries.
 
 **To activate:** Copy to project root as `portals.yml` and customize `title_filter.positive` keywords for your target roles. Add or remove companies as needed.
 
 ### states.yml
 
-Defines the 8 canonical application states (`Evaluated`, `Applied`, `Responded`, `Interview`, `Offer`, `Rejected`, `Discarded`, `SKIP`) with aliases for common variants. All pipeline scripts validate statuses against this file.
+Defines the 6 canonical enrollment states (`Evaluated`, `Enrolled`, `In Progress`, `Completed`, `Dropped`, `SKIP`) with aliases for common variants. All pipeline scripts validate statuses against this file.
 
-**Do not rename states** -- the dashboard and all scripts depend on these exact IDs. You can add aliases if you encounter new variants that should map to an existing state.
+**Do not rename states** -- all scripts depend on these exact IDs. You can add aliases if you encounter new variants that should map to an existing state.

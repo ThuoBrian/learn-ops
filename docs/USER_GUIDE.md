@@ -59,17 +59,21 @@ the domain is learning, not jobs.
   Node.js 20+.)
 - **Node.js 18+** and `git`. `npx` ships with Node and is used by the installer.
 
-### Recommended — one command
+### Windows users (no terminal experience needed)
+
+Download the zip from [github.com/ThuoBrian/learn-ops/releases](https://github.com/ThuoBrian/learn-ops/releases),
+extract it, and double-click **`setup.bat`** (one-time). After setup, double-click
+**`run.bat`** to launch the guided menu (`npm run menu`). See [INSTALL.md](../INSTALL.md)
+for full instructions.
+
+### Recommended — clone
 
 ```bash
-npx @santifer/learn-ops init
+git clone https://github.com/ThuoBrian/learn-ops.git
 cd learn-ops
+npm install
 claude        # or: gemini / codex / qwen / opencode / agy / grok
 ```
-
-`npx` runs the installer once without installing anything globally. It clones the
-latest release into `./learn-ops`, installs dependencies, and materializes the
-multi-CLI skill entrypoints.
 
 ### Advanced — clone manually
 
@@ -486,7 +490,7 @@ may already be recorded (duplicates are skipped, not re-added).
 
 Windows doesn't create symlinks by default, so the multi-CLI skill entrypoints
 (`.claude/skills/`, `.opencode/skills/`, …) check out as plain pointer files. Run
-`node update-system.mjs apply` (or `npx @santifer/learn-ops init` on a fresh install);
+`node update-system.mjs apply` (or clone from `github.com/ThuoBrian/learn-ops` on a fresh install);
 the `materializeSkillEntrypoints` step replaces them with real content. No `mklink`
 or Developer Mode needed.
 

@@ -1,6 +1,6 @@
 # Running Learn-Ops on a Budget
 
-Token usage costs and rate limits are the most common bottlenecks when setting up a high-volume job search pipeline. Since Learn-Ops processes full job descriptions, evaluates them against your CV across 10 dimensions, and tailors resumes/cover letters, the context size can grow quickly.
+Token usage costs and rate limits are the most common bottlenecks when setting up a high-volume training evaluation pipeline. Since Learn-Ops evaluates courses against your learner profile across 7 blocks (A–G), the context size can grow quickly.
 
 Fortunately, **Learn-Ops is completely AI-agnostic.** The pipeline relies on the AI coding CLI (or standalone scripts) to process prompt files under `modes/`. This means you can point your CLI to cheaper API providers or local models with **zero code changes** in Learn-Ops.
 
@@ -106,12 +106,12 @@ Running 32B or 70B models locally requires substantial system resources:
 To prevent unnecessary API costs or hitting rate limits, implement the following practices:
 
 1. **Use the Batch Limit Flag**:
-   Instead of manually splitting `batch/batch-input.tsv`, use the `--limit <N>` flag to process only a small capped number of offers (e.g. 5-10) in a single run. This lets you inspect the output quality before committing to a larger run:
+   Instead of manually splitting `batch/batch-input.tsv`, use the `--limit <N>` flag to process only a small capped number of courses (e.g. 5-10) in a single run. This lets you inspect the output quality before committing to a larger run:
    ```bash
    ./batch/batch-runner.sh --limit 5
    ```
 2. **Use the Dry Run Flag**:
-   Always run a dry run first to verify which offers will be processed:
+   Always run a dry run first to verify which courses will be processed:
    ```bash
    ./batch/batch-runner.sh --dry-run
    ```
@@ -121,7 +121,7 @@ To prevent unnecessary API costs or hitting rate limits, implement the following
    ./batch/batch-runner.sh --resume-paused
    ```
 4. **Use `--verify` on Scans**:
-   When running job board scans, use the liveness verifier to filter out expired postings before they enter your pipeline. This prevents wasting LLM tokens evaluating closed jobs:
+   When running scans, use the liveness verifier to filter out unavailable courses before they enter your pipeline. This prevents wasting LLM tokens evaluating inaccessible content:
    ```bash
    npm run scan -- --verify
    ```

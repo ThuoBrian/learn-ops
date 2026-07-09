@@ -1,6 +1,6 @@
 # Local Parser Cookbook
 
-Local parsers let `scan.mjs` read SSR or static career pages without asking an agent to browse the page. The parser runs as a local command, prints normalized jobs JSON to stdout, and lets the scanner keep using the same title filtering, deduplication, and pipeline output flow.
+Local parsers let `scan.mjs` read SSR or static training provider pages without asking an agent to browse the page. The parser runs as a local command, prints normalized courses JSON to stdout, and lets the scanner keep using the same title filtering, deduplication, and pipeline output flow.
 
 ## When To Use This
 
