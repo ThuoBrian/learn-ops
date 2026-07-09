@@ -5,7 +5,7 @@ courses, free certs, and scholarships; evaluate each against your career goals; 
 enrollment pipeline — all from your AI coding CLI (Claude Code, Codex, OpenCode, Gemini,
 Qwen, Copilot, Kimi, Antigravity CLI).
 
-Maintained by **Brian Thuo** (bthuo@poverty-action.org).
+Maintained by **Brian Thuo** (thuogachau@gmail.com).
 Forked from [career-ops](https://github.com/santifer/career-ops) (the AI job-search
 pipeline). Same framework — provider-plugin scanner, A-G evaluation, canonical-state
 tracker, safe auto-updater, multi-CLI agent skill — repurposed for **learning**, not jobs.
