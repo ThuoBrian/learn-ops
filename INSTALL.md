@@ -1,7 +1,11 @@
 # Learn-Ops — Installation Guide
 
-Find free AI/ML and cybersecurity trainings, track your progress, and get
-personalized course recommendations — all from a simple menu.
+Find free AI/ML and cybersecurity courses, certificates, and scholarships —
+matched to your goals — and keep track of what you've enrolled in, all from a
+simple menu. No coding experience needed.
+
+> Already comfortable with a terminal and Git? See the **For developers**
+> section in [README.md](README.md) for the command-line install instead.
 
 ---
 
@@ -18,7 +22,7 @@ That's it. Everything else is installed automatically.
 
 Learn-Ops runs on Node.js. If you already have it, skip to Step 2.
 
-1. Go to **https://nodejs.org/en/download**
+1. Go to **[nodejs.org/en/download](https://nodejs.org/en/download)**
 2. Click **Windows Installer (.msi)** under the LTS version
 3. Run the installer and click through the defaults
 4. When it finishes, close and reopen any open terminal windows
