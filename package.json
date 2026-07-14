@@ -1,6 +1,6 @@
 {
   "name": "learn-ops",
-  "version": "0.1.0",
+  "version": "1.13.0",
   "description": "Free AI/ML & cybersecurity training finder — works with any AI coding CLI (Claude Code, OpenCode, Gemini, Codex, Qwen)",
   "private": true,
   "scripts": {
