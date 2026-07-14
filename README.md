@@ -3,7 +3,13 @@
 **Find free AI/ML and cybersecurity courses, certificates, and scholarships — matched
 to your goals — and keep track of what you've enrolled in.**
 
+<<<<<<< HEAD
 No coding experience needed. Everything runs from a simple menu on your computer.
+=======
+Maintained by **Brian Thuo** (thuogachau@gmail.com).
+Same framework — provider-plugin scanner, A-G evaluation, canonical-state
+tracker, safe auto-updater, multi-CLI agent skill — repurposed for **learning**, not jobs.
+>>>>>>> 601f1f65cfdd9fd506d89e965cf09675d709fd6f
 
 Maintained by **Brian Thuo** (<thuogachau@gmail.com>).
 
