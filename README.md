@@ -6,8 +6,7 @@ enrollment pipeline — all from your AI coding CLI (Claude Code, Codex, OpenCod
 Qwen, Copilot, Kimi, Antigravity CLI).
 
 Maintained by **Brian Thuo** (thuogachau@gmail.com).
-Forked from [career-ops](https://github.com/santifer/career-ops) (the AI job-search
-pipeline). Same framework — provider-plugin scanner, A-G evaluation, canonical-state
+Same framework — provider-plugin scanner, A-G evaluation, canonical-state
 tracker, safe auto-updater, multi-CLI agent skill — repurposed for **learning**, not jobs.
 
 ## What it does
