@@ -1,6 +1,6 @@
 {
   "name": "@santifer/learn-ops",
-  "version": "1.14.0",
+  "version": "1.13.0",
   "description": "One-command installer for learn-ops — the AI-powered job search pipeline built on Claude Code.",
   "bin": {
     "learn-ops": "bin/cli.mjs"
